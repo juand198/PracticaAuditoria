@@ -1,0 +1,75 @@
+#login{
+    min-width: fit-content;
+    width: 50%;
+    margin: 9% auto;
+}
+
+.invisible{
+    display: none !important;
+}
+
+.alerta_apagada{
+    margin-top: 3%;
+    display: none;
+    width: 40%;
+    float: left;
+    left: 30%;
+}
+
+.btn-outline-secondary:hover {
+    color: #fff;
+    background-color: #008cff;
+    border-color: #008cff ;
+}
+
+.boton_pass_marcado {
+    color: #fff;
+    background-color: #008cff;
+    border-color: #008cff ;
+}
+
+.bg-light {
+    background-color: #c5e2ffbd!important;
+}
+
+.navbar-light .navbar-nav .nav-link{
+    color: #6b6b6b;
+}
+
+.navbar-nav {
+    width: 100%;
+}
+
+a#logout{
+    font-size: 170%;
+}
+
+#todasTareas{
+    display: flex;
+    flex-direction: column;
+}
+
+#todasTareas button{
+    margin: 10px;
+    width: 29%;
+}
+
+.btn_js{
+    margin: 10px;
+}
+
+#visualizador{
+    border-left: #000000 solid 3px;
+    border-right: #000000 solid 3px;
+}
+
+#visualizador-gestor{
+    display: flex;
+    flex-direction: column;
+    
+    padding: 15px;
+}
+
+.row{
+    margin: 0px;
+}

@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>    
+    <link rel="stylesheet" href="./../recursos/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./../recursos/fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="./../custom/custom.css">
+</head>
+<body onload="comprobarAcceso();llenarAuditorias()">
+    
+    <!-- 
+        
+        Navbar para navegacion entre las 3 opciones que tiene. No cambiar los id ya que son los que usa para luego en el javascrip decidir si son visibles o no en
+        función del tipo de usuario que sea.
+    
+    -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">Auditoring 2.0</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                <a id="gestor" class="nav-item nav-link active" href="#" onclick="addClassCSS(event, 'active','main')">Gestor documental</a>
+                <a id="ejecutor" class="nav-item nav-link" href="#" onclick="addClassCSS(event, 'active','main')">Entorno de ejecución</a>
+                <a id="add-users" class="nav-item nav-link" href="#" onclick="addClassCSS(event, 'active','main');">Añadir usuarios</a>
+            </div>
+            <div style="justify-content: flex-end;" class="navbar-nav">        
+                <span style="margin:auto 10px" id="welcome"></span>
+                <a id="logout" href="./../screens/login.html"><i class="fas fa-power-off"></i></a>
+            </div>
+        </div>
+    </nav>
+
+    <!--
+
+        popup de alerta, solo es visible cuando se le llama mediante la funcion
+
+    -->
+    <div id="alerta" class="alert alerta_apagada" role="alert">
+        <span id="text-error">Hola</span>
+    </div>
+    <!--
+
+        Pantalla de gestor, la clase 'page' no hace nada, necesitaba una clase comun para escoger uno u otro en el javascrip 
+        para mostrarlos u ocultarlos. No cambiar el id ya que lo necesito en le javascript para encontrarlos
+
+    -->
+    <div id="visor-gestor" class="page">
+        
+        <!--<nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <div class="navbar-nav">
+                    <a id="vertareas" class="nav-item nav-link active" href="#" onclick="addClassCSS(event, 'active','tareas')">Todas las tareas</a>
+                    <a id="creartarea" class="nav-item nav-link" href="#" onclick="addClassCSS(event, 'active','tareas')">Crear tarea</a>
+                </div>
+            </div>
+        </nav>-->
+        <div >
+            <div id="acceso_vertareas" class="gestor-vistas">
+                <div id="pop-up_NuevaTarea">
+                
+                </div>
+                <div  class="row">
+                    <div id="todasTareas" class="col-5">
+                        
+                    </div>
+                    <div class="col-2" id="visualizador">
+                        <div id="visualizador-gestor-titulo"></div>
+                        <div id="visualizador-gestor"></div>
+                    </div>
+                    <div id="info-visualizador-gestor" class="col-5">
+
+                        
+                    </div>
+                </div>
+            </div>
+            <!--<div id="acceso_creartarea" class="gestor-vistas invisible">
+                <h2>crear</h2>
+                <button type="button" class="btn btn-outline-primary">Crear tarea</button>
+            </div>-->
+
+        </div>
+    </div>
+    
+
+
+    <!--
+
+        Pantalla de ejecutor, la clase 'page' no hace nada, necesitaba una clase comun para escoger uno u otro en el javascrip 
+        para mostrarlos u ocultarlos. No cambiar el id ya que lo necesito en le javascript para encontrarlos
+
+    -->
+    <div id="visor-ejecutor" class="page invisible">
+        <select id="empresas-auditadas">
+            <option>Selecciona la empresa auditada</option>
+        </select>
+        <div style="display: none;" id="ejecutor-info">
+            <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><p style="color:blue"><b>Personal</b></p></td>
+                  </tr>
+                  <tr>
+                    <td>Retribuciones</td>
+                  </tr>
+                  <tr>
+                    <td>Indemnizaciones</td>
+                  </tr>
+                  <tr>
+                    <td>Incorporaciones</td>
+                  </tr>
+                  
+                  <tr>
+                    <td><p style="color:blue"><b>Contratación</b></p></td>
+                  </tr>
+                  <tr>
+                    <td>Contratos mayores</td>
+                  </tr>
+                  <tr>
+                    <td>Contratos menores y otros gastos</td>
+                  </tr>
+                  <tr>
+                    <td>Contratos modificados</td>
+                  </tr>
+                  
+                  <tr>
+                    <td><p style="color:blue"><b>Encargos a medios propios</b></p></td>
+                  </tr>
+                  <tr>
+                    <td>Encargos ordenados por la entidad</td>
+                  </tr>
+                  <tr>
+                    <td>Encargos recibidos por la entidad</td>
+                  </tr>
+                  <tr>
+                    <td>Convenios</td>
+                  </tr>
+              
+                  <tr>
+                    <td><p style="color:blue"><b>Ayudas concedidas y subvenciones</b></p></td>
+                  </tr>
+                  <tr>
+                    <td>Concurrencia competitiva</td>
+                  </tr>
+                  <tr>
+                    <td>Concesión directa</td>
+                  </tr>
+                  <tr>
+                    <td>Entregas dinerarias sin contraprestación</td>
+                  </tr>
+              
+                  <tr>
+                    <td><p style="color:blue"><b>Endeudamiento y otras operaciones financiación</b></p></td>
+                  </tr>
+                  <tr>
+                    <td>Operaciones de endeudamiento</td>
+                  </tr>
+                  <tr>
+                    <td>Acuerdos con entidades financieras</td>
+                  </tr>
+              
+                  <tr>
+                    <td><p style="color:blue"><b>Análisis de gestión: procedimientos de tesorería</b></p></td>
+                  </tr>
+                  <tr>
+                    <td>Cuentas bancarias</td>
+                  </tr>
+              
+              
+                </tbody>
+              </table>
+        </div>
+    </div>
+    <!--
+
+        Pantalla de creador de usuarios, la clase 'page' no hace nada, necesitaba una clase comun para escoger uno u otro en el javascript
+        para mostrarlos u ocultarlos. No cambiar el id ya que lo necesito en le javascript para encontrarlos
+
+    -->
+    <div style="margin: 8% auto;" id="visor-add-users" class="page invisible col-5"> 
+        <div style="margin-top: 10px;" class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="basic-addon1"><i class="fas fa-user"></i></span>
+            </div>
+            <input id="user_value" type="text" class="form-control" placeholder="Nombre usuario" aria-label="Username" aria-describedby="basic-addon1">
+        </div>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="basic-addon1"><i class="fas fa-key"></i></span>
+            </div>
+            <input id="password_value" type="password" class="form-control" placeholder="Contraseña" aria-label="password" aria-describedby="basic-addon1">
+            <div class="input-group-append">
+                <button id="password" class="btn btn-outline-secondary" type="button" onclick="activePassword(event)"><i class="far fa-eye"></i></button>
+            </div>
+        </div>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="basic-addon1"><i class="fas fa-key"></i></span>
+            </div>
+            <input id="password2_value" type="password" class="form-control" placeholder="Confirmar contraseña" aria-label="password" aria-describedby="basic-addon1">
+            <div class="input-group-append">
+                <button id="password2" class="btn btn-outline-secondary" type="button" onclick="activePassword(event)"><i class="far fa-eye"></i></button>
+            </div>
+        </div>
+        <div style="display: flex;flex-direction: column;margin-bottom: 20px;" id="auditoras" >
+            
+        </div>         
+        <div class="input-group-prepend show" >
+            <button style="background-color: #008cff;" id="menu-desplegable" onclick="abrirMenuCategorias()" class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Tipo usuario</button>
+            <div id="menu-categorias"  class="dropdown-menu">
+                <a class="dropdown-item" name="Usuario" onclick="cambiarMenuCategorias(event)">Usuario</a>
+                <a class="dropdown-item" name="Auditor" onclick="cambiarMenuCategorias(event)">Auditor</a>
+                <a class="dropdown-item" name="Interventor" onclick="cambiarMenuCategorias(event)">Interventor</a>
+            </div>
+            <div style="margin: auto;">
+                <button type="button" class="btn btn-primary" onclick="crearUsuario()">Crear usuario</button>
+            </div>
+        </div> 
+        
+    </div>
+</body>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="./../recursos/bootstrap/js/bootstrap.js"></script>
+<script src="./../recursos/fontawesome/js/all.js"></script>
+<script src="./../custom/custom.js"></script>
+</html>

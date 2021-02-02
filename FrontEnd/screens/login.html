@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./../recursos/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./../recursos/fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="./../custom/custom.css">
+</head>
+<body onload="deleteStorage()">
+    <div>
+        <div id="login" class="card text-center">
+            <div class="card-header">
+              <ul class="nav nav-tabs card-header-tabs">
+                <li class="nav-item">
+                  <a id="certificado" class="nav-link active" onclick="addClassCSS(event,'active','login')" href="#">Certificado ACCV/Dni-e</a>
+                </li>
+                <li class="nav-item">
+                  <a id="usuario" class="nav-link" onclick="addClassCSS(event,'active','login')" href="#">Usuario/Contraseña</a>
+                </li>
+                <li class="nav-item">
+                  <a id="correo" class="nav-link" onclick="addClassCSS(event,'active','login')" href="#">Correo GVA</a>
+                </li>
+              </ul>
+            </div>
+            <div id="acceso_certificado" class="card-body">
+              <h5 class="card-title">ACCV/Dni-e</h5>
+              <p class="card-text">Acceso mediante ACCV/Dni-e</p>
+              <a href="#" class="btn btn-primary">Identificarse con certificado</a>
+            </div>
+            <div id="acceso_usuario" class="card-body invisible">
+                <h5 class="card-title">Usuario y contraseña</h5>
+                <p class="card-text">Acceso mediante usuario y contraseña</p>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroup-sizing-lg"><i class="fas fa-user"></i></span>
+                    </div>
+                    <input id="acceso_usuario_user" type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroup-sizing-lg"><i class="fas fa-key"></i></span>
+                    </div>
+                    <input id="acceso_usuario_password_value" type="password" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                    <div class="input-group-append">
+                      <button id="acceso_usuario_password" class="btn btn-outline-secondary" type="button" onclick="activePassword(event)"><i class="far fa-eye"></i></button>
+                    </div>
+                </div>
+                <a href="#" onclick="loginUser()" class="btn btn-primary">Identificarse con usuario</a>
+            </div>
+            <div id="acceso_correo" class="card-body invisible">
+              <h5 class="card-title">Correo GVA</h5>
+              <p class="card-text">Acceso mediante correo GVA</p>
+              <a href="#" onclick="hola()" class="btn btn-primary">Identificarse con correo</a>
+            </div>
+            
+        </div>
+    </div>
+</body>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="./../recursos/bootstrap/js/bootstrap.min.js"></script>
+<script src="./../recursos/fontawesome/js/all.min.js"></script>
+<script src="./../custom/custom.js"></script>
+</html>
